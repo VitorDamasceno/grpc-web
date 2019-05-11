@@ -24,9 +24,10 @@ package main
 import (
 	"log"
 	"net"
+	"os"
 
-	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"github.com/sdamasceno/helloworld-grpc/db"
 	pb "github.com/sdamasceno/helloworld-grpc/project"
 	"google.golang.org/grpc"
 )
@@ -45,19 +46,13 @@ CREATE TABLE project (
 
 func main() {
 
-	// // this Pings the database trying to connect, panics on error
-	// // use sqlx.Open() for sql.Open() semantics
-	db, err := sqlx.Connect("postgres", "host=database user=postgres password=postgres dbname=grpc sslmode=disable")
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	// // exec the schema or fail; multi-statement Exec behavior varies between
-	// // database drivers;  pq will exec them all, sqlite3 won't, ymmv
-	_, err = db.Exec(schema)
-	if err != nil {
-		log.Println("exe:", err)
-	}
+	db, err := db.NewDB(db.DBConfig{
+		DBName:   os.Getenv("DBNAME"),
+		Username: os.Getenv("USERNAME"),
+		Password: os.Getenv("PASSWORD"),
+		Port:     os.Getenv("PORT"),
+		Host:     os.Getenv("HOST"),
+	})
 
 	lis, err := net.Listen("tcp", port)
 	if err != nil {

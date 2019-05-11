@@ -14,7 +14,7 @@
 
 syntax = "proto3";
 
-package project;
+package estimate;
 
 message ID {
   string ID = 1;
@@ -22,19 +22,25 @@ message ID {
 
 message Empty {}
 
-message Project {
+message Estimate {
   string ID = 1;
-  string name = 2;
+  string title = 2;
   string description = 3;
+  string customer = 4;
+  string customerID = 5;
 }
 
 message ListResponse {
-  repeated Project items = 1;
+  repeated Estimate items = 1;
 }
 
-service ProjectService {
-  rpc Create (Project) returns (ID) {}
+message CreateResponse {
+  string ID = 1;
+}
+
+service EstimateService {
+  rpc Create (Estimate) returns (CreateResponse) {}
   rpc GetAll (Empty) returns (ListResponse) {}
-  rpc GetOne (ID) returns (Project) {}
+  rpc GetOne (ID) returns (Estimate) {}
   rpc DeleteOne (ID) returns (Empty) {}
 }

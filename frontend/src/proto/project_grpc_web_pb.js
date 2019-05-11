@@ -91,15 +91,15 @@ proto.project.ProjectServicePromiseClient =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.project.Project,
- *   !proto.project.ProjectCreateResponse>}
+ *   !proto.project.ID>}
  */
 const methodInfo_ProjectService_Create = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.project.ProjectCreateResponse,
+  proto.project.ID,
   /** @param {!proto.project.Project} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.project.ProjectCreateResponse.deserializeBinary
+  proto.project.ID.deserializeBinary
 );
 
 
@@ -108,9 +108,9 @@ const methodInfo_ProjectService_Create = new grpc.web.AbstractClientBase.MethodI
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.project.ProjectCreateResponse)}
+ * @param {function(?grpc.web.Error, ?proto.project.ID)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.project.ProjectCreateResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.project.ID>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.project.ProjectServiceClient.prototype.create =
@@ -129,7 +129,7 @@ proto.project.ProjectServiceClient.prototype.create =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.project.ProjectCreateResponse>}
+ * @return {!Promise<!proto.project.ID>}
  *     A native promise that resolves to the response
  */
 proto.project.ProjectServicePromiseClient.prototype.create =
@@ -146,15 +146,15 @@ proto.project.ProjectServicePromiseClient.prototype.create =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.project.Empty,
- *   !proto.project.ProjectListResponse>}
+ *   !proto.project.ListResponse>}
  */
 const methodInfo_ProjectService_GetAll = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.project.ProjectListResponse,
+  proto.project.ListResponse,
   /** @param {!proto.project.Empty} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.project.ProjectListResponse.deserializeBinary
+  proto.project.ListResponse.deserializeBinary
 );
 
 
@@ -163,9 +163,9 @@ const methodInfo_ProjectService_GetAll = new grpc.web.AbstractClientBase.MethodI
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.project.ProjectListResponse)}
+ * @param {function(?grpc.web.Error, ?proto.project.ListResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.project.ProjectListResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.project.ListResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.project.ProjectServiceClient.prototype.getAll =
@@ -184,7 +184,7 @@ proto.project.ProjectServiceClient.prototype.getAll =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.project.ProjectListResponse>}
+ * @return {!Promise<!proto.project.ListResponse>}
  *     A native promise that resolves to the response
  */
 proto.project.ProjectServicePromiseClient.prototype.getAll =
@@ -194,6 +194,116 @@ proto.project.ProjectServicePromiseClient.prototype.getAll =
       request,
       metadata || {},
       methodInfo_ProjectService_GetAll);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.project.ID,
+ *   !proto.project.Project>}
+ */
+const methodInfo_ProjectService_GetOne = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.project.Project,
+  /** @param {!proto.project.ID} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.project.Project.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.project.ID} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.project.Project)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.project.Project>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.project.ProjectServiceClient.prototype.getOne =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/project.ProjectService/GetOne',
+      request,
+      metadata || {},
+      methodInfo_ProjectService_GetOne,
+      callback);
+};
+
+
+/**
+ * @param {!proto.project.ID} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.project.Project>}
+ *     A native promise that resolves to the response
+ */
+proto.project.ProjectServicePromiseClient.prototype.getOne =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/project.ProjectService/GetOne',
+      request,
+      metadata || {},
+      methodInfo_ProjectService_GetOne);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.project.ID,
+ *   !proto.project.Empty>}
+ */
+const methodInfo_ProjectService_DeleteOne = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.project.Empty,
+  /** @param {!proto.project.ID} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.project.Empty.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.project.ID} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.project.Empty)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.project.Empty>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.project.ProjectServiceClient.prototype.deleteOne =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/project.ProjectService/DeleteOne',
+      request,
+      metadata || {},
+      methodInfo_ProjectService_DeleteOne,
+      callback);
+};
+
+
+/**
+ * @param {!proto.project.ID} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.project.Empty>}
+ *     A native promise that resolves to the response
+ */
+proto.project.ProjectServicePromiseClient.prototype.deleteOne =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/project.ProjectService/DeleteOne',
+      request,
+      metadata || {},
+      methodInfo_ProjectService_DeleteOne);
 };
 
 

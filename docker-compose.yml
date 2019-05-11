@@ -2,44 +2,26 @@ version: "3"
 services:
   web:
     image: grpcweb/envoy
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: 100M
-      restart_policy:
-        condition: on-failure
     ports:
       - "9211:9211"
     networks:
       - webnet
   grpc-server:
     image: grpcweb/hellogrpc
+    environment:
+    - DBNAME=grpc
+    - USERNAME=postgres
+    - PASSWORD=postgres
+    - HOST=database
+    - PORT=5432
     depends_on:
       - database
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 100M
-      restart_policy:
-        condition: on-failure
     networks:
       - webnet
   database:
     image: postgres:11.3-alpine
     environment:
     - POSTGRES_DB=grpc
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 200M
-      restart_policy:
-        condition: on-failure
     networks:
       - webnet
 networks:

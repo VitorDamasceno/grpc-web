@@ -24,6 +24,45 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type ID struct {
+	ID                   string   `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ID) Reset()         { *m = ID{} }
+func (m *ID) String() string { return proto.CompactTextString(m) }
+func (*ID) ProtoMessage()    {}
+func (*ID) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8340e6318dfdfac2, []int{0}
+}
+
+func (m *ID) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ID.Unmarshal(m, b)
+}
+func (m *ID) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ID.Marshal(b, m, deterministic)
+}
+func (m *ID) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ID.Merge(m, src)
+}
+func (m *ID) XXX_Size() int {
+	return xxx_messageInfo_ID.Size(m)
+}
+func (m *ID) XXX_DiscardUnknown() {
+	xxx_messageInfo_ID.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ID proto.InternalMessageInfo
+
+func (m *ID) GetID() string {
+	if m != nil {
+		return m.ID
+	}
+	return ""
+}
+
 type Empty struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -34,7 +73,7 @@ func (m *Empty) Reset()         { *m = Empty{} }
 func (m *Empty) String() string { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()    {}
 func (*Empty) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8340e6318dfdfac2, []int{0}
+	return fileDescriptor_8340e6318dfdfac2, []int{1}
 }
 
 func (m *Empty) XXX_Unmarshal(b []byte) error {
@@ -58,6 +97,7 @@ var xxx_messageInfo_Empty proto.InternalMessageInfo
 type Project struct {
 	ID                   string   `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description          string   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -67,7 +107,7 @@ func (m *Project) Reset()         { *m = Project{} }
 func (m *Project) String() string { return proto.CompactTextString(m) }
 func (*Project) ProtoMessage()    {}
 func (*Project) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8340e6318dfdfac2, []int{1}
+	return fileDescriptor_8340e6318dfdfac2, []int{2}
 }
 
 func (m *Project) XXX_Unmarshal(b []byte) error {
@@ -102,109 +142,79 @@ func (m *Project) GetName() string {
 	return ""
 }
 
-type ProjectListResponse struct {
+func (m *Project) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+type ListResponse struct {
 	Items                []*Project `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *ProjectListResponse) Reset()         { *m = ProjectListResponse{} }
-func (m *ProjectListResponse) String() string { return proto.CompactTextString(m) }
-func (*ProjectListResponse) ProtoMessage()    {}
-func (*ProjectListResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8340e6318dfdfac2, []int{2}
+func (m *ListResponse) Reset()         { *m = ListResponse{} }
+func (m *ListResponse) String() string { return proto.CompactTextString(m) }
+func (*ListResponse) ProtoMessage()    {}
+func (*ListResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8340e6318dfdfac2, []int{3}
 }
 
-func (m *ProjectListResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ProjectListResponse.Unmarshal(m, b)
+func (m *ListResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListResponse.Unmarshal(m, b)
 }
-func (m *ProjectListResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ProjectListResponse.Marshal(b, m, deterministic)
+func (m *ListResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListResponse.Marshal(b, m, deterministic)
 }
-func (m *ProjectListResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ProjectListResponse.Merge(m, src)
+func (m *ListResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListResponse.Merge(m, src)
 }
-func (m *ProjectListResponse) XXX_Size() int {
-	return xxx_messageInfo_ProjectListResponse.Size(m)
+func (m *ListResponse) XXX_Size() int {
+	return xxx_messageInfo_ListResponse.Size(m)
 }
-func (m *ProjectListResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ProjectListResponse.DiscardUnknown(m)
+func (m *ListResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ProjectListResponse proto.InternalMessageInfo
+var xxx_messageInfo_ListResponse proto.InternalMessageInfo
 
-func (m *ProjectListResponse) GetItems() []*Project {
+func (m *ListResponse) GetItems() []*Project {
 	if m != nil {
 		return m.Items
 	}
 	return nil
 }
 
-type ProjectCreateResponse struct {
-	ID                   string   `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ProjectCreateResponse) Reset()         { *m = ProjectCreateResponse{} }
-func (m *ProjectCreateResponse) String() string { return proto.CompactTextString(m) }
-func (*ProjectCreateResponse) ProtoMessage()    {}
-func (*ProjectCreateResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8340e6318dfdfac2, []int{3}
-}
-
-func (m *ProjectCreateResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ProjectCreateResponse.Unmarshal(m, b)
-}
-func (m *ProjectCreateResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ProjectCreateResponse.Marshal(b, m, deterministic)
-}
-func (m *ProjectCreateResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ProjectCreateResponse.Merge(m, src)
-}
-func (m *ProjectCreateResponse) XXX_Size() int {
-	return xxx_messageInfo_ProjectCreateResponse.Size(m)
-}
-func (m *ProjectCreateResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ProjectCreateResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ProjectCreateResponse proto.InternalMessageInfo
-
-func (m *ProjectCreateResponse) GetID() string {
-	if m != nil {
-		return m.ID
-	}
-	return ""
-}
-
 func init() {
+	proto.RegisterType((*ID)(nil), "project.ID")
 	proto.RegisterType((*Empty)(nil), "project.Empty")
 	proto.RegisterType((*Project)(nil), "project.Project")
-	proto.RegisterType((*ProjectListResponse)(nil), "project.ProjectListResponse")
-	proto.RegisterType((*ProjectCreateResponse)(nil), "project.ProjectCreateResponse")
+	proto.RegisterType((*ListResponse)(nil), "project.ListResponse")
 }
 
 func init() { proto.RegisterFile("project.proto", fileDescriptor_8340e6318dfdfac2) }
 
 var fileDescriptor_8340e6318dfdfac2 = []byte{
-	// 209 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2d, 0x28, 0xca, 0xcf,
-	0x4a, 0x4d, 0x2e, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x87, 0x72, 0x95, 0xd8, 0xb9,
-	0x58, 0x5d, 0x73, 0x0b, 0x4a, 0x2a, 0x95, 0x74, 0xb9, 0xd8, 0x03, 0x20, 0x62, 0x42, 0x7c, 0x5c,
-	0x4c, 0x9e, 0x2e, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x4c, 0x9e, 0x2e, 0x42, 0x42, 0x5c,
-	0x2c, 0x79, 0x89, 0xb9, 0xa9, 0x12, 0x4c, 0x60, 0x11, 0x30, 0x5b, 0xc9, 0x96, 0x4b, 0x18, 0xaa,
-	0xdc, 0x27, 0xb3, 0xb8, 0x24, 0x28, 0xb5, 0xb8, 0x20, 0x3f, 0xaf, 0x38, 0x55, 0x48, 0x8d, 0x8b,
-	0x35, 0xb3, 0x24, 0x35, 0xb7, 0x58, 0x82, 0x51, 0x81, 0x59, 0x83, 0xdb, 0x48, 0x40, 0x0f, 0x66,
-	0x2d, 0x54, 0x71, 0x10, 0x44, 0x5a, 0x49, 0x9d, 0x4b, 0x14, 0x2a, 0xe2, 0x5c, 0x94, 0x9a, 0x58,
-	0x92, 0x0a, 0x37, 0x00, 0xcd, 0x6e, 0xa3, 0x0e, 0x46, 0x2e, 0x3e, 0xa8, 0xca, 0xe0, 0xd4, 0xa2,
-	0xb2, 0xcc, 0xe4, 0x54, 0x21, 0x1b, 0x2e, 0x36, 0x88, 0x26, 0x21, 0x0c, 0xe3, 0xa5, 0xe4, 0xd0,
-	0x45, 0x50, 0x8d, 0x57, 0x62, 0x10, 0xb2, 0xe0, 0x62, 0x73, 0x4f, 0x2d, 0x71, 0xcc, 0xc9, 0x11,
-	0xe2, 0x83, 0xab, 0x05, 0x87, 0x80, 0x94, 0x0c, 0xba, 0x5e, 0x64, 0x9f, 0x29, 0x31, 0x24, 0xb1,
-	0x81, 0x83, 0xce, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0xbb, 0x9f, 0x55, 0xd2, 0x4b, 0x01, 0x00,
-	0x00,
+	// 249 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x90, 0xc1, 0x4a, 0xc3, 0x40,
+	0x10, 0x86, 0x93, 0xd4, 0x26, 0x74, 0xa2, 0x41, 0x06, 0x85, 0x90, 0x53, 0xd8, 0x83, 0x54, 0x0f,
+	0x05, 0x2b, 0x78, 0x17, 0x23, 0x25, 0x20, 0x54, 0xe2, 0x13, 0xd4, 0x38, 0x87, 0x95, 0x24, 0xbb,
+	0xec, 0x0e, 0x82, 0x0f, 0xe8, 0x7b, 0x49, 0xb7, 0x31, 0x84, 0xe4, 0xb2, 0xec, 0x7c, 0xff, 0xbf,
+	0xf3, 0xcf, 0x0e, 0x5c, 0x68, 0xa3, 0xbe, 0xa8, 0xe6, 0x8d, 0x36, 0x8a, 0x15, 0x46, 0x7d, 0x29,
+	0xae, 0x20, 0x28, 0x0b, 0x4c, 0x8e, 0x67, 0xea, 0xe7, 0xfe, 0x7a, 0x55, 0x05, 0x65, 0x21, 0x22,
+	0x58, 0xbe, 0xb4, 0x9a, 0x7f, 0xc4, 0x1e, 0xa2, 0xb7, 0x93, 0x73, 0xea, 0x41, 0x84, 0xb3, 0xee,
+	0xd0, 0x52, 0x1a, 0x38, 0xe2, 0xee, 0x98, 0x43, 0xfc, 0x49, 0xb6, 0x36, 0x52, 0xb3, 0x54, 0x5d,
+	0xba, 0x70, 0xd2, 0x18, 0x89, 0x47, 0x38, 0x7f, 0x95, 0x96, 0x2b, 0xb2, 0x5a, 0x75, 0x96, 0xf0,
+	0x06, 0x96, 0x92, 0xa9, 0xb5, 0xa9, 0x9f, 0x2f, 0xd6, 0xf1, 0xf6, 0x72, 0xf3, 0x3f, 0x67, 0x1f,
+	0x5b, 0x9d, 0xe4, 0xed, 0xaf, 0x0f, 0x49, 0x8f, 0xde, 0xc9, 0x7c, 0xcb, 0x9a, 0xf0, 0x16, 0xc2,
+	0x67, 0x43, 0x07, 0x26, 0x9c, 0xbd, 0xca, 0xe2, 0x81, 0x94, 0x85, 0xf0, 0xf0, 0x1e, 0xc2, 0x1d,
+	0xf1, 0x53, 0xd3, 0x60, 0x32, 0x08, 0xee, 0x83, 0xd9, 0xf5, 0x50, 0x8f, 0xc7, 0x12, 0xde, 0xb1,
+	0xfb, 0x8e, 0x78, 0xdf, 0x11, 0x8e, 0x7b, 0x65, 0xb3, 0x28, 0xe1, 0xe1, 0x1d, 0xac, 0x0a, 0x6a,
+	0x88, 0x69, 0xe6, 0x9e, 0xa4, 0x09, 0xef, 0x23, 0x74, 0xfb, 0x7f, 0xf8, 0x0b, 0x00, 0x00, 0xff,
+	0xff, 0xa8, 0xe5, 0xc1, 0x51, 0x90, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -219,8 +229,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ProjectServiceClient interface {
-	Create(ctx context.Context, in *Project, opts ...grpc.CallOption) (*ProjectCreateResponse, error)
-	GetAll(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ProjectListResponse, error)
+	Create(ctx context.Context, in *Project, opts ...grpc.CallOption) (*ID, error)
+	GetAll(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListResponse, error)
+	GetOne(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Project, error)
+	DeleteOne(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type projectServiceClient struct {
@@ -231,8 +243,8 @@ func NewProjectServiceClient(cc *grpc.ClientConn) ProjectServiceClient {
 	return &projectServiceClient{cc}
 }
 
-func (c *projectServiceClient) Create(ctx context.Context, in *Project, opts ...grpc.CallOption) (*ProjectCreateResponse, error) {
-	out := new(ProjectCreateResponse)
+func (c *projectServiceClient) Create(ctx context.Context, in *Project, opts ...grpc.CallOption) (*ID, error) {
+	out := new(ID)
 	err := c.cc.Invoke(ctx, "/project.ProjectService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -240,9 +252,27 @@ func (c *projectServiceClient) Create(ctx context.Context, in *Project, opts ...
 	return out, nil
 }
 
-func (c *projectServiceClient) GetAll(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ProjectListResponse, error) {
-	out := new(ProjectListResponse)
+func (c *projectServiceClient) GetAll(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ListResponse, error) {
+	out := new(ListResponse)
 	err := c.cc.Invoke(ctx, "/project.ProjectService/GetAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) GetOne(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Project, error) {
+	out := new(Project)
+	err := c.cc.Invoke(ctx, "/project.ProjectService/GetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) DeleteOne(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/project.ProjectService/DeleteOne", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -251,19 +281,27 @@ func (c *projectServiceClient) GetAll(ctx context.Context, in *Empty, opts ...gr
 
 // ProjectServiceServer is the server API for ProjectService service.
 type ProjectServiceServer interface {
-	Create(context.Context, *Project) (*ProjectCreateResponse, error)
-	GetAll(context.Context, *Empty) (*ProjectListResponse, error)
+	Create(context.Context, *Project) (*ID, error)
+	GetAll(context.Context, *Empty) (*ListResponse, error)
+	GetOne(context.Context, *ID) (*Project, error)
+	DeleteOne(context.Context, *ID) (*Empty, error)
 }
 
 // UnimplementedProjectServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedProjectServiceServer struct {
 }
 
-func (*UnimplementedProjectServiceServer) Create(ctx context.Context, req *Project) (*ProjectCreateResponse, error) {
+func (*UnimplementedProjectServiceServer) Create(ctx context.Context, req *Project) (*ID, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (*UnimplementedProjectServiceServer) GetAll(ctx context.Context, req *Empty) (*ProjectListResponse, error) {
+func (*UnimplementedProjectServiceServer) GetAll(ctx context.Context, req *Empty) (*ListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAll not implemented")
+}
+func (*UnimplementedProjectServiceServer) GetOne(ctx context.Context, req *ID) (*Project, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOne not implemented")
+}
+func (*UnimplementedProjectServiceServer) DeleteOne(ctx context.Context, req *ID) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOne not implemented")
 }
 
 func RegisterProjectServiceServer(s *grpc.Server, srv ProjectServiceServer) {
@@ -306,6 +344,42 @@ func _ProjectService_GetAll_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectService_GetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).GetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/project.ProjectService/GetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).GetOne(ctx, req.(*ID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectService_DeleteOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).DeleteOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/project.ProjectService/DeleteOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).DeleteOne(ctx, req.(*ID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ProjectService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "project.ProjectService",
 	HandlerType: (*ProjectServiceServer)(nil),
@@ -317,6 +391,14 @@ var _ProjectService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAll",
 			Handler:    _ProjectService_GetAll_Handler,
+		},
+		{
+			MethodName: "GetOne",
+			Handler:    _ProjectService_GetOne_Handler,
+		},
+		{
+			MethodName: "DeleteOne",
+			Handler:    _ProjectService_DeleteOne_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
