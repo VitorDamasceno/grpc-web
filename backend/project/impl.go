@@ -28,28 +28,14 @@ func (s *server) Create(ctx context.Context, in *Project) (*ID, error) {
 		log.Fatalf("failed to generate UUID: %v", err)
 	}
 
-	// tx, err := s.DB.Begin()
-	// if err != nil {
-	// 	log.Println("err begin transaction:", err)
-	// 	return nil, err
-	// }
-
 	_, err = s.DB.Exec(insertStatment, u2.String(), in.GetName(), in.GetDescription())
 	if err != nil {
 		log.Println("err:", err)
 		return nil, err
 	}
-	// err = tx.Commit()
-	// if err != nil {
-	// 	log.Println("err:", err)
-	// 	return nil, err
-	// }
-
 	return &ID{ID: u2.String()}, nil
 
 }
-
-// const deleteStatement = "DELETE FROM project_project WHERE id = $1"
 
 func (s *server) DeleteOne(ctx context.Context, id *ID) (*Empty, error) {
 
